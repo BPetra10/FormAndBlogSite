@@ -1,0 +1,299 @@
+<! DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <form autocomplete="off">
+    <fieldset>
+    <legend style="color: white; font-size:25px;">Űrlap kitöltése</legend>
+    <label for="Vezetekn" id="Vezetek" style="color: white; font-size:20px;"><firstletter style="text-transform: uppercase;">V</firstletter>ezetékneved:*</label><br>
+    <span id= "rejt" style="color: white;"></span>
+    <input id="Vezetekn" name="Vezetekn" type="text" placeholder="Vezetéknév" class="feedback-input" onblur="V();" required/><br>
+    <label for="Keresztn" id="Kereszt" style="color: white; font-size:20px;"><firstletter style="text-transform: uppercase;">K</firstletter>eresztneved:*</label><br>
+    <span id= "rejt2" style="color: white;"></span>
+    <input id="Keresztn" name="Keresztn" type="text"  placeholder="Keresztnév" class="feedback-input" onblur="K();" required/><br>
+    <label for="Gyerek" id="Gyerek" style="color: white; font-size:20px;"><firstletter style="text-transform: uppercase;">G</firstletter>yermekeinek száma:*</label><br>
+    <span id= "rejt3" style="color: white;"></span>
+    <input id="Gyereksz" name="Gyerek" type="number"  placeholder="Gyerekszám" min="0" max="9" class="feedback-input"  onKeyPress="if(this.value.length==1) return false;" onblur="Gy();" required/><br>
+    <label for="Email" id="Email" style="color: white; font-size:20px;"><firstletter style="text-transform: uppercase;">E</firstletter>mail címed:*</label><br>
+    <span id= "rejt4" style="color: white;"></span>
+    <input id="Emailc" type="email" size="64" maxLength="64" placeholder="username@gmail.com" class="feedback-input" onblur="E();" required><br>    
+    <input id="kuldes" type="submit" name="Küldés" title="Küldés" value="Elküldés" onclick="Ellenorzes();">
+    <input id="vissza" type="reset" name="Viszaállítás" title="Visszaállítás" value="Visszaállítás" onclick="Vissza();">
+    </fieldset>
+    </form>
+    <style>
+        body { background:rgb(30,40,40); }
+        form { max-width:420px; margin:50px auto; }
+
+        .feedback-input {
+            color:white;
+            font-family:sans-serif;
+            font-weight:500px;
+            font-size: 18px;
+            border-radius: 5px;
+            line-height: 22px;
+            background-color: transparent;
+            border:2px solid brown;
+            transition: all 0.s;
+            padding: 13px;
+            margin-bottom: 15px;
+            width:100%;
+            box-sizing: border-box;
+            outline:0;
+            }
+
+        .feedback-input:focus { border:2px solid #CC4949; }
+        
+        ::placeholder 
+            { 
+                color: gainsboro;
+            }
+        
+        [type="submit"] {
+            font-family: 'Montserrat', sans-serif;
+            width: 40%;
+            background-color: darkred;
+            border-radius:5px;
+            border:0;
+            cursor:pointer;
+            color:white;
+            font-size:24px;
+            padding-top:10px;
+            padding-bottom:10px;
+            transition: all 0.3s;
+            margin-top:-4px;
+            margin-right: 35px;
+            font-weight:700;
+            }
+        
+        [type="submit"]:hover { background:crimson; }
+        
+        [type="reset"] {
+            font-family: 'Montserrat', sans-serif;
+            width: 40%;
+            background-color: darkred;
+            border-radius:5px;
+            border:0;
+            cursor:pointer;
+            color:white;
+            font-size:24px;
+            padding-top:10px;
+            padding-bottom:10px;
+            transition: all 0.3s;
+            margin-top:-4px;
+            margin-left: 35px;
+            font-weight:700;
+            }
+        
+        [type="reset"]:hover { background:crimson; }
+    </style>
+    
+    <script>
+        function Ellenorzes()
+        {
+            var mail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            var karakter = /^[a-zA-Z]+$/;
+            var ok = 0;
+            if (!document.getElementById("Vezetekn").value.match(karakter)) 
+            {
+                    document.getElementById("Vezetek").style.color="red"; 
+                    document.getElementById("Vezetek").style.textTransform = "uppercase";
+                    document.getElementById("Vezetekn").style.backgroundColor="red";
+                    if(document.getElementById("Vezetekn").value=="")
+                    document.getElementById("rejt").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt").innerHTML = "Csak betűket adhat meg!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Vezetek").style.color="green"; 
+                    document.getElementById("Vezetek").style.textTransform = "lowercase";
+                    document.getElementById("Vezetekn").style.backgroundColor="green";
+                    document.getElementById("rejt").innerHTML = "A megadott név helyes!";
+            }
+            
+            if (!document.getElementById("Keresztn").value.match(karakter)) 
+            {
+                    document.getElementById("Kereszt").style.color="red"; 
+                    document.getElementById("Kereszt").style.textTransform = "uppercase";
+                    document.getElementById("Keresztn").style.backgroundColor="red";
+                    if(document.getElementById("Keresztn").value=="")
+                    document.getElementById("rejt2").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt2").innerHTML = "Csak betűket adhat meg!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Kereszt").style.color="green"; 
+                    document.getElementById("Kereszt").style.textTransform = "lowercase";
+                    document.getElementById("Keresztn").style.backgroundColor="green";
+                    document.getElementById("rejt2").innerHTML = "A megadott név helyes!";
+            }
+            
+            if(document.getElementById("Gyereksz").value=="")
+            {
+                    document.getElementById("Gyerek").style.color="red"; 
+                    document.getElementById("Gyerek").style.textTransform = "uppercase";
+                    document.getElementById("Gyereksz").style.backgroundColor="red";
+                    document.getElementById("rejt3").innerHTML = "Nem adott meg semmit!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Gyerek").style.color="green"; 
+                    document.getElementById("Gyerek").style.textTransform = "lowercase";
+                    document.getElementById("Gyereksz").style.backgroundColor="green";
+                    document.getElementById("rejt3").innerHTML = "A megadott érték helyes!";
+            }
+            
+             if (!document.getElementById("Emailc").value.match(mail)) 
+            {
+                    document.getElementById("Email").style.color="red"; 
+                    document.getElementById("Email").style.textTransform = "uppercase";
+                    document.getElementById("Emailc").style.backgroundColor="red";
+                    if(document.getElementById("Emailc").value=="")
+                    document.getElementById("rejt4").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt4").innerHTML = "A megadott email formátuma nem megfelelő!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Email").style.color="green"; 
+                    document.getElementById("Email").style.textTransform = "lowercase";
+                    document.getElementById("Emailc").style.backgroundColor="green";
+                    document.getElementById("rejt4").innerHTML = "A megadott email formátuma helyes!";
+            }
+            
+            /*Ellenőrzés regexp náélkül: function emailCheck(mezo){
+                szoveg = mezo.value;
+                if (!(szoveg.indexOf('@')>0 && szoveg.indexOf('@')<szoveg.length-1)){
+                        alert("Rossz e-mail cím!");
+                        return false;
+                    }
+                    else{
+                            alert("Formailag helyes e-mail cím!");
+                            return true;
+                    }
+                }
+                    <INPUT TYPE="text" NAME="email" SIZE="20">
+                    <INPUT TYPE="button" VALUE="Ellenõrizd" onClick="emailCheck(form_email.email)">*/
+            if (ok==0)
+                    alert("Az űrlap kitöltése helyes!");
+        }
+        
+        function V()
+        {
+            var karakter = /^[a-zA-Z]+$/;
+            if (!document.getElementById("Vezetekn").value.match(karakter)) 
+            {
+                    document.getElementById("Vezetek").style.color="red"; 
+                    document.getElementById("Vezetek").style.textTransform = "uppercase";
+                    document.getElementById("Vezetekn").style.backgroundColor="red";
+                    if(document.getElementById("Vezetekn").value=="")
+                    document.getElementById("rejt").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt").innerHTML = "Csak betűket adhat meg!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Vezetek").style.color="green"; 
+                    document.getElementById("Vezetek").style.textTransform = "lowercase";
+                    document.getElementById("Vezetekn").style.backgroundColor="green";
+                    document.getElementById("rejt").innerHTML = "A megadott név helyes!";
+            }
+        }
+        
+        function K()
+        {
+            var karakter = /^[a-zA-Z]+$/;
+            if (!document.getElementById("Keresztn").value.match(karakter)) 
+            {
+                    document.getElementById("Kereszt").style.color="red"; 
+                    document.getElementById("Kereszt").style.textTransform = "uppercase";
+                    document.getElementById("Keresztn").style.backgroundColor="red";
+                    if(document.getElementById("Keresztn").value=="")
+                    document.getElementById("rejt2").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt2").innerHTML = "Csak betűket adhat meg!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Kereszt").style.color="green"; 
+                    document.getElementById("Kereszt").style.textTransform = "lowercase";
+                    document.getElementById("Keresztn").style.backgroundColor="green";
+                    document.getElementById("rejt2").innerHTML = "A megadott név helyes!";
+            }
+        }
+        
+        function Gy()
+        {
+            if(document.getElementById("Gyereksz").value=="")
+            {
+                    document.getElementById("Gyerek").style.color="red"; 
+                    document.getElementById("Gyerek").style.textTransform = "uppercase";
+                    document.getElementById("Gyereksz").style.backgroundColor="red";
+                    document.getElementById("rejt3").innerHTML = "Nem adott meg semmit!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Gyerek").style.color="green"; 
+                    document.getElementById("Gyerek").style.textTransform = "lowercase";
+                    document.getElementById("Gyereksz").style.backgroundColor="green";
+                    document.getElementById("rejt3").innerHTML = "A megadott érték helyes!";
+            }
+        }
+        
+        function E()
+        {   
+            var mail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+             if (!document.getElementById("Emailc").value.match(mail)) 
+            {
+                    document.getElementById("Email").style.color="red"; 
+                    document.getElementById("Email").style.textTransform = "uppercase";
+                    document.getElementById("Emailc").style.backgroundColor="red";
+                    if(document.getElementById("Emailc").value=="")
+                    document.getElementById("rejt4").innerHTML = "Nem adott meg semmit!";
+                    else
+                    document.getElementById("rejt4").innerHTML = "A megadott email formátuma nem megfelelő!";
+                    ok++;
+            }
+            else
+            {
+                    document.getElementById("Email").style.color="green"; 
+                    document.getElementById("Email").style.textTransform = "lowercase";
+                    document.getElementById("Emailc").style.backgroundColor="green";
+                    document.getElementById("rejt4").innerHTML = "A megadott email formátuma helyes!";
+            }
+        }
+        
+        function Vissza()
+        {
+                    document.getElementById("Vezetek").style.color="white"; 
+                    document.getElementById("Vezetek").style.textTransform = "lowercase";
+                    document.getElementById("Vezetekn").style.backgroundColor="transparent";
+                    document.getElementById("rejt").innerHTML = "";
+                    
+                    document.getElementById("Kereszt").style.color="white"; 
+                    document.getElementById("Kereszt").style.textTransform = "lowercase";
+                    document.getElementById("Keresztn").style.backgroundColor="transparent";
+                    document.getElementById("rejt2").innerHTML = "";
+                    
+                    document.getElementById("Gyerek").style.color="white"; 
+                    document.getElementById("Gyerek").style.textTransform = "lowercase";
+                    document.getElementById("Gyereksz").style.backgroundColor="transparent";
+                    document.getElementById("rejt3").innerHTML = "";
+                    
+                    document.getElementById("Email").style.color="white"; 
+                    document.getElementById("Email").style.textTransform = "lowercase";
+                    document.getElementById("Emailc").style.backgroundColor="transparent";
+                    document.getElementById("rejt4").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
